@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML FORM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="dataForm" action="/submit" method="post">
+    <div class="form-all">
+    <h1>Enter Your Details</h1><br>
+    <p>
+        Discription:This form is intended to get the personal details of all the students.Please fill all the required details
+        and submit it.
+    </p><br>
+
+    <div class="form-container">
+            <h2>First Name:</h2>
+            <input type="text" id="fname" name="fname" value="Enter First Name" onfocus="clearDefaultText()" required>
+            <br><br>
+
+            <h2>Last Name:</h2>
+            <input type="text" id="lname" name="lname" value="Enter Last Name" onfocus="clearDefaultText()" required>
+            <br><br>
+
+            <h2>Enter Your Email:</h2>
+            <input type="email" id="email" name="email" value="abc@gmail.com" onfocus="clearDefaultText()" required>
+            <br><br>
+
+            <h2>Enter Your Phone no:</h2>
+            <input type="text" id="phone_no" name="phone_no" value="982*******" onfocus="clearDefaultText()" required>
+            <br><br>
+
+</div>
+
+    <div class="radiobuttons">
+
+        <h2>Gender:</h2>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label>
+        <br><br>
+
+    </div>
+
+    <div class="submit">
+    <input id="saveButton" type="submit" value="Submit">
+    </div>
+</div>
+
+</form>
+
+<script>
+    function clearDefaultText(inputElement, defaultText) {
+        if (inputElement.value === defaultText) {
+            inputElement.value = "";
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const fnameInput = document.getElementById("fname");
+        const lnameInput = document.getElementById("lname");
+        const emailInput = document.getElementById("email");
+        const phoneInput = document.getElementById("phone_no");
+
+        fnameInput.addEventListener('focus', function () {
+            clearDefaultText(fnameInput, "Enter First Name");
+        });
+
+        lnameInput.addEventListener('focus', function () {
+            clearDefaultText(lnameInput, "Enter Last Name");
+        });
+
+        emailInput.addEventListener('focus', function () {
+            clearDefaultText(emailInput, "abc@gmail.com");
+        });
+
+        phoneInput.addEventListener('focus', function () {
+            clearDefaultText(phoneInput, "982*******");
+        });
+
+        const saveButton = document.getElementById('saveButton');
+        const dataForm = document.getElementById('dataForm');
+
+        saveButton.addEventListener('click', function (event) {
+            event.preventDefault(); 
+
+            const fname = dataForm.fname.value;
+            const lname = dataForm.lname.value;
+            const email = dataForm.email.value;
+            const phone_no = dataForm.phone_no.value;
+            const gender = dataForm.gender.value;
+
+            const userData = {
+                fname: fname,
+                lname: lname,
+                email: email,
+                phone_no: phone_no,
+                gender: gender
+            };
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            alert('Data saved to local storage!');
+        });
+    });
+</script>
+
+</body>
+
+</html>
